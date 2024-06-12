@@ -1,3 +1,4 @@
+```
 create table board_table(
     id bigint primary key auto_increment,
     boardWriter varchar(50),
@@ -26,3 +27,4 @@ create table member_table(
     memberAge int,
     memberMobile varchar(30)
 ); 
+```
