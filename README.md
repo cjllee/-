@@ -1,4 +1,4 @@
-#  주요 기술 스택
+##  주요 기술 스택
 ```
 Java Development Kit (JDK): 11
 Apache Tomcat: 9.0
@@ -9,6 +9,7 @@ H2 Database: 2.1.214
 SLF4J: 1.7.30
 ```
 
+##  DB
 ```
 create table board_table(
     id bigint primary key auto_increment,
@@ -18,7 +19,6 @@ create table board_table(
     boardContents varchar(500),
     boardCreatedTime datetime default now(),
     boardHits int default 0,
-    fileAttached int default 0
 );
 
 create table comment_table(
