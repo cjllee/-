@@ -19,11 +19,13 @@ public class BoardController {
     private final BoardService boardService;
     private final CommentService commentService;
 
+    //글 작성 화면 조회
     @GetMapping("/save")
     public String saveForm() {
         return "boardsave";
     }
 
+    //글 작성
     @PostMapping("/save")
     public String save(@ModelAttribute BoardDTO boardDTO) {
         int saveResult = boardService.save(boardDTO);
@@ -34,6 +36,7 @@ public class BoardController {
         }
     }
 
+    //글 탐색
     @GetMapping("/")
     public String findAll(Model model) {
         List<BoardDTO> boardDTOList = boardService.findAll();
@@ -41,6 +44,7 @@ public class BoardController {
         return "boardlist";
     }
 
+    //특정 글 탐색
     @GetMapping
     public String findById(@RequestParam("id") Long id, Model model) {
         boardService.updateHits(id);
@@ -51,12 +55,14 @@ public class BoardController {
         return "boarddetail";
     }
 
+    //글 삭제
     @GetMapping("/delete")
     public String delete(@RequestParam("id") Long id) {
         boardService.delete(id);
         return "redirect:/board/";
     }
 
+    //글 수정 화면 조회
     @GetMapping("/update")
     public String updateForm(@RequestParam("id") Long id, Model model) {
         BoardDTO boardDTO = boardService.findById(id);
@@ -64,6 +70,7 @@ public class BoardController {
         return "boardupdate";
     }
 
+    //글 수정
     @PostMapping("/update")
     public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
         boardService.update(boardDTO);

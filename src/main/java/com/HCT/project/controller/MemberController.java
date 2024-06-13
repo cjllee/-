@@ -17,11 +17,14 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    //회원 가입 화면 조회
     @GetMapping("/save")
     public String saveForm(){
         return "membersave";
     }
 
+
+    // 회원 가입
     @PostMapping("/save")
     public String save(@ModelAttribute MemberDTO memberDTO){
         int saveResult = memberService.save(memberDTO);
@@ -34,11 +37,13 @@ public class MemberController {
 
     }
 
+    //로그인 화면 조회
     @GetMapping("/login")
     public String loginForm(){
         return "memberlogin";
     }
 
+    //로그인
     @PostMapping("/login")
     public String login(@ModelAttribute MemberDTO memberDTO,
                         HttpSession session){
@@ -54,6 +59,7 @@ public class MemberController {
 
     }
 
+    // 회원 목록 조회
     @GetMapping("/")
     public String findAll(Model model) {
         List<MemberDTO> memberDTOList = memberService.findAll();
@@ -62,6 +68,7 @@ public class MemberController {
     }
 
 
+    //특정 회원 조회
     @GetMapping
     public String findById(@RequestParam("id") Long id, Model model) {
         MemberDTO memberDTO = memberService.findById(id);
@@ -69,6 +76,7 @@ public class MemberController {
         return "memberdetail";
     }
 
+    //회원 삭제
     @GetMapping("/delete")
     public String delete(@RequestParam("id") Long id) {
         memberService.delete(id);
@@ -76,6 +84,7 @@ public class MemberController {
     }
 
 
+    //회원수정 화면 조회
     @GetMapping("/update")
     public String updateForm(HttpSession session, Model model) {
         String loginEmail = (String) session.getAttribute("loginEmail");
@@ -85,6 +94,7 @@ public class MemberController {
     }
 
 
+    //회원 수정
     @PostMapping("/update")
     public String update(@ModelAttribute MemberDTO memberDTO) {
         boolean result = memberService.update(memberDTO);
@@ -95,6 +105,7 @@ public class MemberController {
         }
     }
 
+    // 이메일 중복 검사
     @PostMapping("/email-check")
     public @ResponseBody String emailCheck(@RequestParam("memberEmail") String memberEmail) {
         System.out.println("memberEmail = " + memberEmail);
